@@ -1,2 +1,11 @@
-# silverstripe-caching
-Add ability to cache dataobjects in a transparent way.
+Silverstripe Caching
+====================
+
+Add ability to cache data objects in a transparent way.
+
+## Usage
+
+Like other extension, 
+
+```
+```
