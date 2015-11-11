@@ -5,6 +5,7 @@
  */
 class CacheableExtension extends DataExtension {
 
+<<<<<<< HEAD
     /**
      *
      */
@@ -35,4 +36,6 @@ class CacheableExtension extends DataExtension {
     public function Identifier() {
         return property_exists($this->owner, 'URLSegment') ? $this->owner->URLSegment : $this->owner->ID;
     }
+=======
+>>>>>>> da8a888a7ed8879b404906383d8ac7d22387b475
 }

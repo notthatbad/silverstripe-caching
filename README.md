@@ -18,4 +18,4 @@ file cache backend. This could be much worse than the direct access to the datab
 
 ## How it works
 
-When requesting a data object with `<ClassName>::by
+When requesting a data object with `<ClassName>::by`
