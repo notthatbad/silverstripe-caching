@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * The current version only allows to clear the complete configured cache.
+ * @todo: Add granularity for cleaning
+ */
 class ClearCacheTask extends BuildTask {
 
     protected $title = 'Clear Cache Task';
@@ -12,6 +16,6 @@ class ClearCacheTask extends BuildTask {
      * @param SS_HTTPRequest $request
      */
     public function run($request) {
-
+        CacheHelper::get_cache()->clean(Zend_Cache::CLEANING_MODE_ALL);
     }
 }
