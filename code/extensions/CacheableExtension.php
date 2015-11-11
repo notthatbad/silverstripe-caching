@@ -15,7 +15,7 @@ class CacheableExtension extends DataExtension {
     }
 
     /**
-     * 
+     *
      */
     public function onBeforeDelete() {
         // delete the cache
