@@ -26,7 +26,7 @@ class CacheableExtension extends DataExtension {
     private function key() {
         $name = $this->ownerBaseClass;
         $id = $this->Identifier();
-        return "$name.$id";
+        return CacheHelper::to_key("$name.$id");
     }
 
     /**
