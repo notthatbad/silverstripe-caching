@@ -40,8 +40,12 @@ class CachedDataList extends DataList {
             if($data = $cache->load($key)) {
                 return unserialize($data);
             } else {
-                // if not found search in database and write result to cache
+                // if not found in cache, perform callback
                 $data = $callback();
+                if(!$data) {
+                    // if result is empty, return null
+                    return null;
+                }
                 $cachedFunctions = array_keys($data->hasOne());
                 foreach($cachedFunctions as $fn) {
                     $data->$fn();
