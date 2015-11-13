@@ -18,4 +18,9 @@ file cache backend. This could be much worse than the direct access to the datab
 
 ## How it works
 
-When requesting a data object with `<ClassName>::by`
+When requesting a data object with `<ClassName>::byID` or `<ClassName>::byURL` the cached data list implementation
+evaluates if the request object is flagged as cacheable. If this is true, the cache will be requested and only if
+nothing is found, the database is accessed. After fetching the object, every has_one dependency is fetched and the
+result is stored in a cache.
+
+When a data object should be deleted or was modified, the cache entry will be cleared or alternated respectively.
