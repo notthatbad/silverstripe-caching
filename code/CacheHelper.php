@@ -44,7 +44,7 @@ class CacheHelper {
     }
 
     /**
-     * @return Zend_Cache_Frontend the current configured cache
+     * @return ICacheFrontend the current configured cache
      */
     public static function get_cache() {
         return SS_Cache::factory('local_cache');

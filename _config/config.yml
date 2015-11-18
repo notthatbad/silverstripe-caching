@@ -1,5 +1,6 @@
+After:
+  - 'framework/*'
+  - 'cms/*'
 ---
-Name: caching
-Before:
-  - 'mysite/*'
----
+CacheHelper:
+  SerializerType: StandardSerializer
