@@ -3,7 +3,7 @@
 /**
  * Class StandardSerializer
  */
-class StandardSerializer implements ICacheSerializer {
+class StandardSerializer extends Object implements ICacheSerializer {
     public function serialize($data) {
         return serialize($data);
     }

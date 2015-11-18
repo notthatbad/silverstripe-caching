@@ -1,8 +1,6 @@
----
-Name: caching
 After:
   - 'framework/*'
   - 'cms/*'
 ---
 CacheHelper:
-  SerializerType: TokenAuth
+  SerializerType: StandardSerializer
