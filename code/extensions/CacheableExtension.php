@@ -9,8 +9,9 @@ class CacheableExtension extends DataExtension {
      *
      */
     public function onAfterWrite() {
+        $serializer = CacheHelper::get_serializer();
         // update the cache
-        CacheHelper::get_cache()->save(serialize($this->owner), $this->key());
+        CacheHelper::get_cache()->save($serializer->serialize($this->owner), $this->key());
         parent::onAfterWrite();
     }
 

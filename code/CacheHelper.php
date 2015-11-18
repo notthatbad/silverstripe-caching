@@ -29,15 +29,16 @@ class CacheHelper {
      * @return mixed the result of the function with the given arguments
      */
     public static function cache_function($fn) {
+        $serializer = self::get_serializer();
         $args = array_slice(func_get_args(), 1);
         $key = self::to_key($fn."_".serialize($args));
         $cache = self::get_cache();
         if($data = $cache->load($key)) {
-            return unserialize($data);
+            return $serializer->deserialize($data);
         } else {
             // if not found call function and write result to cache
             $data = call_user_func_array($fn, $args);
-            $cache->save(serialize($data), $key);
+            $cache->save($serializer->serialize($data), $key);
             // return result
             return $data;
         }
@@ -48,5 +49,18 @@ class CacheHelper {
      */
     public static function get_cache() {
         return SS_Cache::factory('local_cache');
+    }
+
+    /**
+     * @return ICacheSerializer
+     * @throws Exception
+     */
+    public static function get_serializer() {
+        $availableAuths = ClassInfo::implementorsOf('ICacheSerializer');
+        $type = Config::inst()->get('CacheHelper', 'SerializerType');
+        if(in_array($type, $availableAuths)) {
+            return $type::create();
+        }
+        throw new Exception("Configured cache serializer type '$type' not supported", 404);
     }
 }
