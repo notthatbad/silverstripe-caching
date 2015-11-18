@@ -31,6 +31,7 @@ class CachedDataList extends DataList {
      * @return DataObject
      */
     protected function cache($identifier, $callback) {
+        $serializer = CacheHelper::get_serializer();
         // check for cacheable extension of data object class
         $className = $this->dataClass;
         if(Object::has_extension($className, 'CacheableExtension')) {
@@ -38,7 +39,7 @@ class CachedDataList extends DataList {
             $cache = CacheHelper::get_cache();
             $key = CacheHelper::to_key("$className.$identifier");
             if($data = $cache->load($key)) {
-                return unserialize($data);
+                return $serializer->deserialize($data);
             } else {
                 // if not found in cache, perform callback
                 $data = $callback();
@@ -50,7 +51,7 @@ class CachedDataList extends DataList {
                 foreach($cachedFunctions as $fn) {
                     $data->$fn();
                 }
-                $cache->save(serialize($data), $key);
+                $cache->save($serializer->serialize($data), $key);
                 // return result
                 return $data;
             }

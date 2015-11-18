@@ -1,5 +1,8 @@
 ---
 Name: caching
-Before:
-  - 'mysite/*'
+After:
+  - 'framework/*'
+  - 'cms/*'
 ---
+CacheHelper:
+  SerializerType: TokenAuth
