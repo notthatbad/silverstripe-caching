@@ -4,14 +4,16 @@
  * This subclass adds a caching layer to the data list implementation of Silverstripe.
  *
  */
-class CachedDataList extends DataList {
+class CachedDataList extends DataList
+{
 
     /**
      * @param int $id the id of an data object
      * @return DataObject the data object with the given id
      */
-    public function byID($id) {
-        return $this->cache($id, function() use ($id){return parent::byID($id);});
+    public function byID($id)
+    {
+        return $this->cache($id, function () use ($id) {return parent::byID($id);});
     }
 
     /**
@@ -20,8 +22,9 @@ class CachedDataList extends DataList {
      * @param string $url the url slug
      * @return DataObject the data object with the given url slug
      */
-    public function byURL($url) {
-        return $this->cache($url, function() use ($url){return parent::byURL($url);});
+    public function byURL($url)
+    {
+        return $this->cache($url, function () use ($url) {return parent::byURL($url);});
     }
 
     /**
@@ -30,25 +33,26 @@ class CachedDataList extends DataList {
      * @param callable $callback the function which can be called to fetch the data
      * @return DataObject
      */
-    protected function cache($identifier, $callback) {
+    protected function cache($identifier, $callback)
+    {
         $serializer = CacheHelper::get_serializer();
         // check for cacheable extension of data object class
         $className = $this->dataClass;
-        if(Object::has_extension($className, 'CacheableExtension')) {
+        if (Object::has_extension($className, 'CacheableExtension')) {
             // search in cache
             $cache = CacheHelper::get_cache();
             $key = CacheHelper::to_key("$className.$identifier");
-            if($data = $cache->load($key)) {
+            if ($data = $cache->load($key)) {
                 return $serializer->deserialize($data);
             } else {
                 // if not found in cache, perform callback
                 $data = $callback();
-                if(!$data) {
+                if (!$data) {
                     // if result is empty, return null
                     return null;
                 }
                 $cachedFunctions = array_keys($data->hasOne());
-                foreach($cachedFunctions as $fn) {
+                foreach ($cachedFunctions as $fn) {
                     $data->$fn();
                 }
                 $cache->save($serializer->serialize($data), $key);
@@ -59,5 +63,4 @@ class CachedDataList extends DataList {
             return $callback();
         }
     }
-
 }

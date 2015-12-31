@@ -3,7 +3,8 @@
 /**
  * Simple helper for the Silverstripe cache system.
  */
-class CacheHelper {
+class CacheHelper
+{
 
     /**
      * Returns a key, which can be used inside the cache
@@ -11,7 +12,8 @@ class CacheHelper {
      * @param string $str the key which should be used for caching
      * @return string the formatted key
      */
-    public static function to_key($str) {
+    public static function to_key($str)
+    {
         return preg_replace('/[^a-zA-Z0-9_]/', '_', $str);
     }
 
@@ -28,12 +30,13 @@ class CacheHelper {
      * @param callable $fn the function which should be cached
      * @return mixed the result of the function with the given arguments
      */
-    public static function cache_function($fn) {
+    public static function cache_function($fn)
+    {
         $serializer = self::get_serializer();
         $args = array_slice(func_get_args(), 1);
         $key = self::to_key($fn."_".serialize($args));
         $cache = self::get_cache();
-        if($data = $cache->load($key)) {
+        if ($data = $cache->load($key)) {
             return $serializer->deserialize($data);
         } else {
             // if not found call function and write result to cache
@@ -47,7 +50,8 @@ class CacheHelper {
     /**
      * @return ICacheFrontend the current configured cache
      */
-    public static function get_cache() {
+    public static function get_cache()
+    {
         return SS_Cache::factory('local_cache');
     }
 
@@ -55,10 +59,11 @@ class CacheHelper {
      * @return ICacheSerializer
      * @throws Exception
      */
-    public static function get_serializer() {
+    public static function get_serializer()
+    {
         $availableAuths = ClassInfo::implementorsOf('ICacheSerializer');
         $type = Config::inst()->get('CacheHelper', 'SerializerType');
-        if(in_array($type, $availableAuths)) {
+        if (in_array($type, $availableAuths)) {
             return $type::create();
         }
         throw new Exception("Configured cache serializer type '$type' not supported", 404);
