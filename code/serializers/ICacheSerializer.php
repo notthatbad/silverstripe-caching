@@ -3,16 +3,17 @@
 /**
  * Interface ICacheSerializer
  */
-interface ICacheSerializer {
+interface ICacheSerializer
+{
     /**
      * @param mixed $data
      * @return string
      */
-    function serialize($data);
+    public function serialize($data);
 
     /**
      * @param string $bytes
      * @return mixed
      */
-    function deserialize($bytes);
+    public function deserialize($bytes);
 }

@@ -3,12 +3,14 @@
 /**
  * The cacheable data object extension
  */
-class CacheableExtension extends DataExtension {
+class CacheableExtension extends DataExtension
+{
 
     /**
      *
      */
-    public function onAfterWrite() {
+    public function onAfterWrite()
+    {
         $serializer = CacheHelper::get_serializer();
         // update the cache
         CacheHelper::get_cache()->save($serializer->serialize($this->owner), $this->key());
@@ -18,13 +20,15 @@ class CacheableExtension extends DataExtension {
     /**
      *
      */
-    public function onBeforeDelete() {
+    public function onBeforeDelete()
+    {
         // delete the cache
         CacheHelper::get_cache()->remove($this->key());
         parent::onBeforeDelete();
     }
 
-    private function key() {
+    private function key()
+    {
         $name = $this->ownerBaseClass;
         $id = $this->Identifier();
         return CacheHelper::to_key("$name.$id");
@@ -33,7 +37,8 @@ class CacheableExtension extends DataExtension {
     /**
      * @return mixed
      */
-    public function Identifier() {
+    public function Identifier()
+    {
         return property_exists($this->owner, 'URLSegment') ? $this->owner->URLSegment : $this->owner->ID;
     }
 }

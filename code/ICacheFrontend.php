@@ -3,21 +3,22 @@
 /**
  * Simple marker interface for better support of code completion in IDE.
  */
-interface ICacheFrontend {
+interface ICacheFrontend
+{
     /**
      * @param string $data
      * @param string $key
      */
-    function save($data, $key);
+    public function save($data, $key);
 
     /**
      * @param string $key
      */
-    function remove($key);
+    public function remove($key);
 
     /**
      * @param string $key
      * @return mixed
      */
-    function load($key);
+    public function load($key);
 }
