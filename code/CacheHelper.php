@@ -24,24 +24,15 @@ class CacheHelper {
      * $result = CacheHelper::cache_function('FooBar::heavy_calculation', $arg1, $arg2, $arg3);
      * ```
      *
-     * TODO: Their is a Zend_Cache_Frontend for this functionality. Maybe this should be used.
      * @param callable $fn the function which should be cached
      * @return mixed the result of the function with the given arguments
      */
     public static function cache_function($fn) {
-        $serializer = self::get_serializer();
         $args = array_slice(func_get_args(), 1);
-        $key = self::to_key($fn."_".serialize($args));
         $cache = self::get_cache();
-        if($data = $cache->load($key)) {
-            return $serializer->deserialize($data);
-        } else {
-            // if not found call function and write result to cache
-            $data = call_user_func_array($fn, $args);
-            $cache->save($serializer->serialize($data), $key);
-            // return result
-            return $data;
-        }
+        $data = $cache->call($fn, $args);
+        // return result
+        return $data;
     }
 
     /**
