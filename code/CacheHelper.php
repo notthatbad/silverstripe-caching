@@ -38,9 +38,9 @@ class CacheHelper {
     /**
      * @return ICacheFrontend the current configured cache
      */
-    public static function get_cache() {
-        return SS_Cache::factory('local_cache');
-    }
+     public static function get_cache($frontend='Function') {
+         return SS_Cache::factory('local_cache', $frontend);
+     }
 
     /**
      * @return ICacheSerializer
