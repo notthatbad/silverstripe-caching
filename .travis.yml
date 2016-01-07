@@ -25,5 +25,6 @@ before_script:
   - php ~/travis-support/travis_setup.php --source `pwd` --target ~/builds/ss
   - cd ~/builds/ss
   - composer install
+  - echo "extension = mongo.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 script:
   - vendor/bin/phpunit silverstripe-caching/tests/
