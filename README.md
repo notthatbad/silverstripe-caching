@@ -1,6 +1,10 @@
 Silverstripe Caching
 ====================
 
+[![Build Status](https://travis-ci.org/notthatbad/silverstripe-caching.svg)](https://travis-ci.org/notthatbad/silverstripe-caching)
+[![Latest Stable Version](https://poser.pugx.org/ntb/silverstripe-caching/v/stable)](https://packagist.org/packages/ntb/silverstripe-caching)
+[![License](https://poser.pugx.org/ntb/silverstripe-caching/license)](https://packagist.org/packages/ntb/silverstripe-caching)
+
 Add ability to cache data objects, function results and arbitrary data.
 
 ## Usage
