@@ -2,5 +2,6 @@ After:
   - 'framework/*'
   - 'cms/*'
 ---
-CacheHelper:
-  SerializerType: StandardSerializer
+Injector:
+  CacheSerializer:
+    class:  StandardSerializer

@@ -11,4 +11,9 @@ class CacheHelperTest extends SapphireTest {
             $this->assertEquals($expected, CacheHelper::to_key($input));
         }
     }
+
+    public function testGetSerializer() {
+        $serializer = CacheHelper::get_serializer();
+        $this->assertTrue(ClassInfo::classImplements($serializer->class, 'ICacheSerializer'));
+    }
 }

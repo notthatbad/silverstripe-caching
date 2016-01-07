@@ -47,11 +47,6 @@ class CacheHelper {
      * @throws Exception
      */
     public static function get_serializer() {
-        $availableAuths = ClassInfo::implementorsOf('ICacheSerializer');
-        $type = Config::inst()->get('CacheHelper', 'SerializerType');
-        if(in_array($type, $availableAuths)) {
-            return $type::create();
-        }
-        throw new Exception("Configured cache serializer type '$type' not supported", 404);
+        return Injector::inst()->create('CacheSerializer');
     }
 }
