@@ -2,6 +2,7 @@
 
 /**
  * Tests the Zend Cache Backend with a Mongo driver against the MongoClient.
+ * @author Christian Blank <c.blank@notthatbad.net>
  */
 class MongodbBackendTest extends SapphireTest {
 

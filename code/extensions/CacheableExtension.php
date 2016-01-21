@@ -2,6 +2,7 @@
 
 /**
  * The cacheable data object extension
+ * @author Christian Blank <c.blank@notthatbad.net>
  */
 class CacheableExtension extends DataExtension {
 

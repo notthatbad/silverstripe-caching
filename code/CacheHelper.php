@@ -2,6 +2,7 @@
 
 /**
  * Simple helper for the Silverstripe cache system.
+ * @author Christian Blank <c.blank@notthatbad.net>
  */
 class CacheHelper {
 

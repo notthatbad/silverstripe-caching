@@ -3,6 +3,7 @@
 /**
  * This subclass adds a caching layer to the data list implementation of Silverstripe.
  *
+ * @author Christian Blank <c.blank@notthatbad.net>
  */
 class CachedDataList extends DataList {
 

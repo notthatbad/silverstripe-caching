@@ -2,6 +2,7 @@
 
 /**
  *  Tests for CachedDataList
+ * @author Christian Blank <c.blank@notthatbad.net>
  */
 class CachedDataListTest extends SapphireTest {
 

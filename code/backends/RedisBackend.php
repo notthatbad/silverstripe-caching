@@ -63,7 +63,7 @@ class RedisBackend extends Zend_Cache_Backend implements Zend_Cache_Backend_Exte
         }
 
         parent::__construct($options);
-		
+
         $this->_redis = new Redis();
 
         // setup memcached client options
@@ -85,9 +85,9 @@ class RedisBackend extends Zend_Cache_Backend implements Zend_Cache_Backend_Exte
                 }
             }
         }
-		
+
 		$server = array();
-		
+
 		$server = $this->_options['server'];
 		if (!array_key_exists('port', $server)){
 			$server['port'] = self::DEFAULT_PORT;
@@ -95,7 +95,7 @@ class RedisBackend extends Zend_Cache_Backend implements Zend_Cache_Backend_Exte
 		if (!array_key_exists('timeout', $server)) {
             $server['timeout'] = self::DEFAULT_TIMEOUT;
         }
-		
+
 		$this->_redis->connect($server['host'], $server['port'], $server['timeout']);
     }
 

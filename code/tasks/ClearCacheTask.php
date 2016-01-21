@@ -3,6 +3,7 @@
 /**
  * The current version only allows to clear the complete configured cache.
  * @todo: Add granularity for cleaning
+ * @author Christian Blank <c.blank@notthatbad.net>
  */
 class ClearCacheTask extends BuildTask {
 
