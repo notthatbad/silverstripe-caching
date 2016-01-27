@@ -13,34 +13,23 @@ class CachedDataListTest extends SapphireTest {
         Member::add_extension('CacheableExtension');
     }
 
-    public function testCacheFunction() {
-        $call = CacheHelper::cache_function('CachedDataListTest::expensiveFunction');
-        $cache = CacheHelper::cache_function('CachedDataListTest::expensiveFunction');
-        $this->assertEquals($call, $cache);
+    public function testCacheDataObject() {
+        $key = 'Member_1';
+        $data = $this->cacheDataObject();
+        $cache = CacheHelper::get_cache()->load($key);
+        $this->assertEquals($data, CacheHelper::get_serializer()->deserialize($cache));
     }
 
-    public function testCacheFunctionWithVariousParameter() {
-        $call = CacheHelper::cache_function('CachedDataListTest::helperFunction', 1, 'string');
-        $cache = CacheHelper::cache_function('CachedDataListTest::helperFunction', 2, 'string');
-        $this->assertNotEquals($call, $cache);
+    public function testCacheDataListWithoutCacheableExtension() {
+        $key = 'Member_1';
+        Member::remove_extension('CacheableExtension');
+        $this->cacheDataObject();
+        $cache = CacheHelper::get_cache()->load($key);
+        $this->assertFalse($cache);
     }
 
-    public function testCacheData() {
-        $serializer = CacheHelper::get_serializer();
-        $users = CachedDataList::create('Member');
-        $user = $users->byID(1);
-        $loaded = CacheHelper::get_cache()->load('Member_1');
-        $this->assertEquals($user, $serializer->deserialize($loaded));
-    }
-
-    public static function expensiveFunction() {
-        $result = time();
-        sleep(2);
-        return $result;
-    }
-
-    public static function helperFunction($int, $string) {
-        $result = $int.$string;
+    protected function cacheDataObject($class = 'Member', $id = 1) {
+        $result = CachedDataList::create($class)->byID($id);
         return $result;
     }
 }
