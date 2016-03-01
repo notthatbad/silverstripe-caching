@@ -102,8 +102,8 @@ class RedisBackend extends Zend_Cache_Backend implements Zend_Cache_Backend_Exte
     /**
      * Test if a cache is available for the given id and (if yes) return it (false else)
      *
-     * @param  string  $id                     Cache id
-     * @param  boolean $doNotTestCacheValidity If set to true, the cache validity won't be tested
+     * @param string  $id                     Cache id
+     * @param boolean $doNotTestCacheValidity If set to true, the cache validity won't be tested
      * @return string|false cached datas
      */
     public function load($id, $doNotTestCacheValidity = false)
@@ -114,7 +114,7 @@ class RedisBackend extends Zend_Cache_Backend implements Zend_Cache_Backend_Exte
     /**
      * Test if a cache is available or not (for the given id)
      *
-     * @param  string $id Cache id
+     * @param string $id Cache id
      * @return int|false (a cache is not available) or "last modified" timestamp (int) of the available cache record
      */
     public function test($id)
@@ -128,10 +128,10 @@ class RedisBackend extends Zend_Cache_Backend implements Zend_Cache_Backend_Exte
      * Note : $data is always "string" (serialization is done by the
      * core not by the backend)
      *
-     * @param  string $data             Datas to cache
-     * @param  string $id               Cache id
-     * @param  array  $tags             Array of strings, the cache record will be tagged by each string entry
-     * @param  int    $specificLifetime If != false, set a specific lifetime for this cache record (null => infinite lifetime)
+     * @param string $data             Datas to cache
+     * @param string $id               Cache id
+     * @param array  $tags             Array of strings, the cache record will be tagged by each string entry
+     * @param int    $specificLifetime If != false, set a specific lifetime for this cache record (null => infinite lifetime)
      * @return boolean True if no problem
      */
     public function save($data, $id, $tags = array(), $specificLifetime = false)
@@ -151,7 +151,7 @@ class RedisBackend extends Zend_Cache_Backend implements Zend_Cache_Backend_Exte
     /**
      * Remove a cache record
      *
-     * @param  string $id Cache id
+     * @param string $id Cache id
      * @return boolean True if no problem
      */
     public function remove($id)
@@ -169,8 +169,8 @@ class RedisBackend extends Zend_Cache_Backend implements Zend_Cache_Backend_Exte
      * 'notMatchingTag' => unsupported
      * 'matchingAnyTag' => unsupported
      *
-     * @param  string $mode Clean mode
-     * @param  array  $tags Array of tags
+     * @param string $mode Clean mode
+     * @param array  $tags Array of tags
      * @throws Zend_Cache_Exception
      * @return boolean True if no problem
      */
@@ -207,7 +207,7 @@ class RedisBackend extends Zend_Cache_Backend implements Zend_Cache_Backend_Exte
     /**
      * Set the frontend directives
      *
-     * @param  array $directives Assoc of directives
+     * @param array $directives Assoc of directives
      * @throws Zend_Cache_Exception
      * @return void
      */
