@@ -37,11 +37,28 @@ class CacheHelper {
     }
 
     /**
-     * @return Zend_Cache_Frontend the current configured cache
+     * @return ICacheFrontend the current configured cache
      */
-     public static function get_cache($frontend='Function') {
-         return SS_Cache::factory('local_cache', $frontend);
-     }
+    public static function get_cache($frontend='Function') {
+        $localCacheName = Config::inst()->get('CacheHelper', 'LocalCache');
+        return SS_Cache::factory($localCacheName, $frontend);
+    }
+
+    /**
+     * @return ICacheFrontend the current configured cache
+     */
+    public static function get_local_cache() {
+        $localCacheName = Config::inst()->get('CacheHelper', 'LocalCache');
+        return SS_Cache::factory($localCacheName);
+    }
+
+    /**
+     * @return ICacheFrontend the current configured cache
+     */
+    public static function get_global_cache() {
+        $globalCacheName = Config::inst()->get('CacheHelper', 'GlobalCache');
+        return SS_Cache::factory($globalCacheName);
+    }
 
     /**
      * @return ICacheSerializer
